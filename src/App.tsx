@@ -1,8 +1,8 @@
-import { useCallback } from 'react';
+import react,{ useCallback } from 'react';
 import ReactFlow, {
-  Background, Controls, Position, Node
+  Background, Controls, Position, Node, useEdgesState, addEdge,Connection,ConnectionMode, Edge
 } from 'reactflow';
-import { Quadrado } from './components/Nodes/qaudrado';
+import { Quadrado } from './components/Nodes/quadrado';
 
 
 import 'reactflow/dist/style.css';
@@ -21,16 +21,37 @@ const INITIAL_NODES = [
       y:400,
     },
     data: {},
+  }, 
+  {
+    id: 'quadrado-2',
+    type: 'quadrado',
+    position: {
+      x:1000,
+      y:400,
+    },
+    data: {},
   },
 ] satisfies Node[]
+  
+
 
 function App() {
+  const [edges, setEdges, onEdgesChange] = useEdgesState([])
+  console.log(edges);
+ 
+  const onConnect = useCallback((connection: Connection)=> {
+    return setEdges(edges => addEdge(connection,edges))
+  },[])
   return (
     
     <div className='w-screen h-screen'>
       <ReactFlow
       nodeTypes={NODE_TYPES}
       nodes={INITIAL_NODES}
+      edges={edges}
+      onEdgesChange={onEdgesChange}
+      onConnect={onConnect}
+      connectionMode={ConnectionMode.Loose}
       >
           <Background 
           gap={20}
