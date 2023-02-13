@@ -1,68 +1,23 @@
 import react,{ useCallback } from 'react';
-import ReactFlow, {
-  Background, Controls, Position, Node, useEdgesState, addEdge,Connection,ConnectionMode, Edge
-} from 'reactflow';
-import { Quadrado } from './components/Nodes/quadrado';
-
-
-import 'reactflow/dist/style.css';
-
-
-const NODE_TYPES = {
-  quadrado: Quadrado
-}
-
-const INITIAL_NODES = [
-  {
-    id: 'quadrado-1',
-    type: 'quadrado',
-    position: {
-      x:200,
-      y:400,
-    },
-    data: {},
-  }, 
-  {
-    id: 'quadrado-2',
-    type: 'quadrado',
-    position: {
-      x:1000,
-      y:400,
-    },
-    data: {},
-  },
-] satisfies Node[]
-  
+import WhiteBoard from './WhiteBoard';
 
 
 function App() {
-  const [edges, setEdges, onEdgesChange] = useEdgesState([])
-  console.log(edges);
- 
-  const onConnect = useCallback((connection: Connection)=> {
-    return setEdges(edges => addEdge(connection,edges))
-  },[])
-  return (
-    
-    <div className='w-screen h-screen'>
-      <ReactFlow
-      nodeTypes={NODE_TYPES}
-      nodes={INITIAL_NODES}
-      edges={edges}
-      onEdgesChange={onEdgesChange}
-      onConnect={onConnect}
-      connectionMode={ConnectionMode.Loose}
-      >
-          <Background 
-          gap={20}
-          size={2}
-          color="#07303d"
-          />
-          <Controls />
-      </ReactFlow>
+ return (
+  <div className='main'>
+    <div className="container mx-auto bg-gray-200 rounded-xl shadow border p-8 m-10">
+      <p className="text-3xl text-gray-700 font-bold mb-5 text-center ">
+       Bem vindo Ao projeto White Board 
+      </p>
     </div>
-   
-  )
+    <p className='text-2xl text-gray-700 font-bold mb-5 text-center'>
+      O objetivo deste projeto é criar uma plataforma interativa onde os usuários possam desenhar e conectar diferentes elementos (nodos) na tela, como quadrados. O componente ReactFlow está sendo usado para gerenciar o estado e a lógica de conexão entre os nodos, enquanto Taiwind e PostCSS estão sendo usados para garantir uma experiência de usuário elegante e responsiva. Este projeto é uma solução interessante e eficiente para várias necessidades, como brainstorming, apresentações e diagramação.
+    </p>
+    <div className='container mx-auto border p-8 m-10' >
+      <WhiteBoard />
+    </div>
+  </div>
+ )
 }
 
 export default App
