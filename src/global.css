@@ -2,3 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+.main {
+    background: linear-gradient(to bottom right, #282828, #000000);
+    color: #fff;
+  }
+  
+
+body {
+    background: linear-gradient(to bottom right, #282828, #000000);
+  }
+
+.box {
+    background-color: #f8f8f8;
+    color: #333;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  }
+  
